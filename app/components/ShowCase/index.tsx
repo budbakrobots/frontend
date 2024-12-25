@@ -47,7 +47,7 @@ const ShowCase = () => {
     fetchData();
   }, [supabase]);
   return (
-    <div className="col-span-12 overflow-y-auto grid grid-cols-12 gap-4 row-span-7 pt-4">
+    <div className="col-span-12 overflow-y-auto grid grid-cols-12 gap-4 row-span-7 sm:row-span-8 pt-4">
       {data.length > 0 ? (
         data.map((dta, idx) => (
           <div
