@@ -1,54 +1,67 @@
 import { Link } from "@remix-run/react";
 import { useAtom } from "jotai";
 import { useEffect, useState } from "react";
-import { global_session, global_supabase } from "~/store";
-
+import { global_search, global_session, global_supabase } from "~/store";
+import * as spinners from "react-spinners";
+const { FadeLoader } = spinners;
 const ShowCase = () => {
-  const [data, setData] = useState<any[]>([]);
-  const supabase = useAtom(global_supabase)[0];
-  async function fetchData() {
-    if (!supabase) return;
-    const { data, error } = await supabase
-      .from("blogs") // Table name
-      .select("*"); // Selecting all columns (you can specify column names if needed)
+  const search = useAtom(global_search)[0];
 
-    if (error) {
-      console.error("Error fetching data:", error);
-    } else {
-      console.log("Fetched data:");
-      setData([
-        ...data,
-        ...data,
-        ...data,
-        ...data,
-        ...data,
-        ...data,
-        ...data,
-        ...data,
-        ,
-        ...data,
-        ,
-        ...data,
-        ,
-        ...data,
-        ,
-        ...data,
-        ,
-        ...data,
-        ,
-        ...data,
-        ,
-        ...data,
-      ]);
+  const [data, setData] = useState<any[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const supabase = useAtom(global_supabase)[0];
+  async function fetchData(text: string) {
+    setLoading(true);
+    if (!supabase) return;
+    let dataArr: any[] = [];
+    if (text) {
+      let { data, error }: any = await supabase
+        .from("blogs")
+        .select("*")
+        .ilike("title", `%${text}%`);
+      if (data) {
+        dataArr = [...dataArr, ...data];
+      }
+      if (error) {
+        console.log(error);
+      }
     }
+    if (text) {
+      let { data, error }: any = await supabase
+        .from("blogs")
+        .select("*")
+        .ilike("content", `%${text}%`);
+      if (data) {
+        dataArr = [...dataArr, ...data];
+      }
+      if (error) {
+        console.log(error);
+      }
+    } else {
+      const { data, error } = await supabase
+        .from("blogs") // Table name
+        .select("*"); // Selecting all columns (you can specify column names if needed)
+      if (error) {
+        console.error("Error fetching data:", error);
+      } else {
+        console.log("Fetched data:");
+        dataArr = data;
+      }
+    }
+    setData(dataArr);
+    setLoading(false);
   }
   const session = useAtom(global_session)[0];
   useEffect(() => {
-    fetchData();
-  }, [supabase]);
+    fetchData(search);
+  }, [supabase, search]);
   return (
     <div className="col-span-12 overflow-y-auto grid grid-cols-12 gap-4 row-span-7 sm:row-span-8 pt-4">
-      {data.length > 0 ? (
+      {loading ? (
+        <div className="col-span-12 flex-shrink-0 flex items-center justify-center">
+          <FadeLoader color="white" />
+        </div>
+      ) : data.length > 0 ? (
         data.map((dta, idx) => (
           <div
             key={idx}

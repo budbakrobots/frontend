@@ -12,6 +12,7 @@ import { useEffect, useState } from "react";
 import { useAtom } from "jotai";
 import { global_session, global_supabase } from "./store";
 import Menu from "./components/Menu";
+import Loading from "./loading";
 
 export const links: LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -27,25 +28,6 @@ export const links: LinksFunction = () => [
 ];
 
 export function Layout({ children }: { children: React.ReactNode }) {
-  return (
-    <html lang="en">
-      <head>
-        <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <Meta />
-        <Links />
-      </head>
-      <body className="grid grid-cols-12 grid-rows-10 h-screen overflow-hidden">
-        <Menu />
-        {children}
-        <ScrollRestoration />
-        <Scripts />
-      </body>
-    </html>
-  );
-}
-
-export default function App() {
   const setSupabase = useAtom(global_supabase)[1];
   const setSession = useAtom(global_session)[1];
   const [loading, setLoading] = useState(true);
@@ -62,5 +44,24 @@ export default function App() {
       });
     setSupabase(supabase);
   }, [supabase]);
-  return loading ? <h1> Loading </h1> : <Outlet />;
+  return (
+    <html lang="en">
+      <head>
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <Meta />
+        <Links />
+      </head>
+      <body className="grid grid-cols-12 grid-rows-10 h-screen overflow-hidden">
+        <Menu />
+        {loading ? <Loading /> : children}
+        <ScrollRestoration />
+        <Scripts />
+      </body>
+    </html>
+  );
+}
+
+export default function App() {
+  return <Outlet />;
 }
