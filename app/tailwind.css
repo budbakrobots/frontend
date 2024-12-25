@@ -1,10 +1,20 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+* {
+  outline: none;
+  padding: 0px;
+  margin: 0px;
+  box-sizing: border-box;
+}
+.my-custom-image-class {
+  width: 90%;
+  border-radius: 0.5rem;
+  margin-left: 5%;
+}
 html,
 body {
-  @apply bg-white dark:bg-gray-950;
+  @apply bg-blue-200 dark:bg-gray-950;
 
   @media (prefers-color-scheme: dark) {
     color-scheme: dark;
