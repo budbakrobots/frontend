@@ -256,25 +256,6 @@ export function SimpleEditor() {
       navigate("/");
     }
   };
-  // const handleClick = async () => {
-  //   setError(null);
-  //   setResult(null);
-  //   try {
-  //     const content=await editor.getHTML()
-  //     const data:any = await fetcher.submit(
-  //       { content}, // Data to send to the action
-  //       { method: "post", action: "/api/blog/create" } // Replace with your route
-  //     );
-  //     if (data?.errors) {
-  //       setError(data.errors.name)
-  //     } else if(data?.message){
-  //       setResult(data.message)
-  //     }
-  //   } catch (e: any) {
-  //       setError(e.message)
-  //   }
-  // };
-
   return (
     <div className="border-2 border-red-400 row-span-10 col-span-12 grid grid-rows-12 grid-cols-12">
       <div className="col-span-12 row-span-1 flex items-center">
