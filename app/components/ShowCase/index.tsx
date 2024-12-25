@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { global_search, global_session, global_supabase } from "~/store";
 import * as spinners from "react-spinners";
 const { FadeLoader } = spinners;
+var timout: any;
 const ShowCase = () => {
   const search = useAtom(global_search)[0];
 
@@ -53,7 +54,12 @@ const ShowCase = () => {
   }
   const session = useAtom(global_session)[0];
   useEffect(() => {
-    fetchData(search);
+    if (timout) {
+      clearTimeout(timout);
+    }
+    timout = setTimeout(() => {
+      fetchData(search);
+    }, 500);
   }, [supabase, search]);
   return (
     <div className="col-span-12 overflow-y-auto grid grid-cols-12 gap-4 row-span-7 sm:row-span-8 pt-4">
