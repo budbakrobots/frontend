@@ -6,8 +6,12 @@ import {
   ScrollRestoration,
 } from "@remix-run/react";
 import type { LinksFunction } from "@remix-run/node";
-
 import "./tailwind.css";
+import supabase from "./config/supabaseClient";
+import { useEffect, useState } from "react";
+import { useAtom } from "jotai";
+import { global_session, global_supabase } from "./store";
+import Menu from "./components/Menu";
 
 export const links: LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -31,7 +35,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Meta />
         <Links />
       </head>
-      <body>
+      <body className="grid grid-cols-12 grid-rows-10 h-screen overflow-hidden">
+        <Menu />
         {children}
         <ScrollRestoration />
         <Scripts />
@@ -41,5 +46,21 @@ export function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
-  return <Outlet />;
+  const setSupabase = useAtom(global_supabase)[1];
+  const setSession = useAtom(global_session)[1];
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    supabase.auth
+      .getSession()
+      .then(({ data: { session } }) => {
+        setSession(session);
+        setLoading(false);
+      })
+      .catch((err: any) => {
+        console.log(err);
+        setLoading(false);
+      });
+    setSupabase(supabase);
+  }, [supabase]);
+  return loading ? <h1> Loading </h1> : <Outlet />;
 }

@@ -19,4 +19,8 @@ export default {
     },
   },
   plugins: [],
+  respectDefaultStyles: true, 
+  corePlugins: {
+    preflight: false, // This is the key change!
+  }
 } satisfies Config;
