@@ -17,7 +17,7 @@ import History from "@tiptap/extension-history";
 import { FaTrashAlt } from "react-icons/fa";
 
 import * as Icons from "./icons";
-import Button from "./button";
+import Button from "../button";
 import { useAtom } from "jotai";
 import { global_session, global_supabase } from "~/store";
 import { useNavigate } from "@remix-run/react";

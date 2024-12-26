@@ -122,10 +122,12 @@ const ShowCase = () => {
               )}
             </div>
           ))
-        ) : search ? (
-          <h1>No blogs found with {search}</h1>
         ) : (
-          <h1>Blogs are comming soon</h1>
+          <h1 className="flex items-center justify-center row-span-12 col-span-12">
+            {search
+              ? `No blogs found with "${search}"`
+              : "Blogs are comming soon"}
+          </h1>
         )}
       </div>
     </div>

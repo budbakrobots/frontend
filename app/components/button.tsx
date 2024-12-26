@@ -7,7 +7,8 @@ const Button: React.FC<{
   onChange?: ChangeEventHandler<HTMLInputElement>;
   active: boolean;
   file?: boolean;
-}> = ({ onChange, submitType, file, active, children, onClick }) => {
+  icon?: boolean;
+}> = ({ onChange, submitType, file, active, children, onClick, icon }) => {
   const rand = uuid();
   return file ? (
     <>
@@ -32,7 +33,9 @@ const Button: React.FC<{
     <button
       onClick={onClick}
       type={submitType ? "submit" : "button"}
-      className={`p-2 w-full h-full rounded-lg border border-white  [&>svg]:w-full [&>svg]:h-full ${
+      className={`p-2 w-full ${
+        icon ? "aspect-square" : "h-full"
+      } border-0 rounded-lg [&>svg]:w-full [&>svg]:h-full bg-opacity-80 ${
         active ? "bg-slate-800 text-white" : "bg-transparent"
       }`}
     >

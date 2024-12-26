@@ -23,12 +23,14 @@ export default function Admin() {
 
   if (!session && supabase) {
     return (
-      <div className="relative col-span-12 row-span-10 w-full p-8 ">
-        <Auth
-          supabaseClient={supabase}
-          appearance={{ theme: ThemeSupa }}
-          providers={[]}
-        />
+      <div className="relative col-span-12 row-span-8 w-full p-8 ">
+        <div className="bg-white dark:bg-black bg-opacity-70 dark:bg-opacity-30 backdrop-blur-md w-full h-full rounded-lg p-4 ">
+          <Auth
+            supabaseClient={supabase}
+            appearance={{ theme: ThemeSupa }}
+            providers={[]}
+          />
+        </div>
       </div>
     );
   } else {
