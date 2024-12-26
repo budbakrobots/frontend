@@ -18,7 +18,9 @@ export default function Index() {
         text="Empowering Tomorrow’s Robots: Solving the Challenges of High-Tech Idiots, One Innovation at a Time"
       />
       <ShowCase />
-      <Search />
+      <div className="sm:hidden col-span-12 row-span-1 grid grid-rows-1 grid-cols-12">
+        <Search />
+      </div>
     </div>
   );
 }

@@ -8,7 +8,7 @@ const Search = () => {
   const [search, setSearch] = useAtom(global_search);
   return (
     <>
-      <div className="col-span-12 row-span-1 grid grid-cols-7 grid-rows-1 p-2 gap-2">
+      <div className="col-span-12 row-span-1 grid grid-cols-7 grid-rows-1 p-2 gap-2 ">
         <input
           className="col-span-6 p-2"
           value={search}

@@ -4,12 +4,16 @@ import { useEffect, useState } from "react";
 import { global_search, global_session, global_supabase } from "~/store";
 import * as spinners from "react-spinners";
 const { FadeLoader } = spinners;
+import { FaTrashAlt } from "react-icons/fa";
+import { MdEditSquare } from "react-icons/md";
+
 var timout: any;
 const ShowCase = () => {
   const search = useAtom(global_search)[0];
 
   const [data, setData] = useState<any[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
+  const [refresh, setRefresh] = useState<boolean>(true);
   const supabase = useAtom(global_supabase)[0];
   async function fetchData(text: string) {
     setLoading(true);
@@ -60,9 +64,9 @@ const ShowCase = () => {
     timout = setTimeout(() => {
       fetchData(search);
     }, 500);
-  }, [supabase, search]);
+  }, [supabase, search, refresh]);
   return (
-    <div className="col-span-12 overflow-y-auto grid grid-cols-12 gap-4 row-span-7 sm:row-span-8 pt-4">
+    <div className="col-span-12 overflow-y-auto grid grid-cols-12 gap-4 row-span-7 sm:row-span-9 pt-4">
       {loading ? (
         <div className="col-span-12 flex-shrink-0 flex items-center justify-center">
           <FadeLoader color="white" />
@@ -84,12 +88,35 @@ const ShowCase = () => {
               </h2>
             </Link>
             {session && (
-              <Link
-                to={`/edit/${dta.title}`}
-                className="absolute bottom-2 right-2 p-2 px-4 no-underline bg-blue-950 border-2 border-red-100 rounded-lg"
-              >
-                edit
-              </Link>
+              <>
+                <Link
+                  to={`/edit/${dta.title}`}
+                  className="absolute bottom-2 right-2 p-2 px-4 no-underline bg-gray-400 border-2 border-red-100 rounded-lg text-white"
+                >
+                  <MdEditSquare size="16" />
+                </Link>
+
+                <button
+                  onClick={async () => {
+                    const res = confirm(
+                      `Do you want to delete blog, "${dta.title}"`
+                    );
+                    if (res && supabase) {
+                      const { data, error } = await supabase
+                        .from("blogs") // Replace with your table name
+                        .delete()
+                        .eq("id", dta.id);
+                      if (error) {
+                        alert("something went wrong!!");
+                      }
+                      setRefresh((st: boolean) => !st);
+                    }
+                  }}
+                  className="absolute bottom-2 left-2 p-2 px-4 no-underline bg-red-950 border-0 text-white rounded-lg"
+                >
+                  <FaTrashAlt size="16" />
+                </button>
+              </>
             )}
           </div>
         ))
