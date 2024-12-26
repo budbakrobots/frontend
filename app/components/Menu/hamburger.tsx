@@ -44,7 +44,7 @@ const Hamburger = () => {
         <Button active={true} onClick={() => {}}>
           Manage User
         </Button>
-        <div className="row-start-12">
+        <div className="row-start-12 sm:row-start-4">
           <Button
             active={true}
             onClick={async () => {

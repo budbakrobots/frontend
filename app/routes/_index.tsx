@@ -5,8 +5,12 @@ import ShowCase from "~/components/ShowCase";
 
 export const meta: MetaFunction = () => {
   return [
-    { title: "New Remix App" },
-    { name: "description", content: "Welcome to Remix!" },
+    { title: "Budbak Blogs" },
+    {
+      name: "description",
+      content:
+        "Bugbak Robots: Your go-to resource for conquering robotics software challenges. We dive into the latest tech, dissect common bugs, and offer practical solutions for roboticists, engineers, and developers working with ROS, simulation, and more. Join our community and level up your robot programming skills.",
+    },
   ];
 };
 

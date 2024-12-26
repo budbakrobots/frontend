@@ -10,7 +10,7 @@ const Menu = () => {
   return (
     <>
       <div
-        className={`absolute top-0 left-0 backdrop-blur-sm w-full h-full `}
+        className={`absolute top-0 left-0 backdrop-blur-sm w-full h-[10%] `}
       ></div>
       <nav
         className={` z-10 w-full flex items-center   p-2 px-8 row-span-1 col-span-12 justify-center    sm:justify-between ${
