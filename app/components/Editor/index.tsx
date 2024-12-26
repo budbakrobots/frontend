@@ -26,6 +26,7 @@ export function SimpleEditor() {
   const supabase = useAtom(global_supabase)[0];
   const session = useAtom(global_session)[0];
   const navigate = useNavigate();
+  const [menu, setMenu] = useState(false);
   const [heroImage, setHeroImage] = useState("");
   const [title, setTitle] = useState<string>("");
   const [result, setResult] = useState<string | null>(null);
@@ -259,27 +260,39 @@ export function SimpleEditor() {
   return (
     <div className="border-2 border-red-400 row-span-10 col-span-12 grid grid-rows-12 grid-cols-12">
       <div className="col-span-12 row-span-1 flex items-center">
-        <div className="col-span-12 row-span-1 flex w-full items-center justify-between px-2">
+        <div className="col-span-12 row-span-1 flex w-full items-center justify-between px-8">
           <h1>Create Blog</h1>
-          <div className="w-20">
-            <Button active={true} onClick={handleClick}>
-              Add
-            </Button>
+          <div className="flex gap-4">
+            <div className="w-20">
+              <Button
+                active={true}
+                onClick={() => {
+                  navigate(-1);
+                }}
+              >
+                CANCEL
+              </Button>
+            </div>
+            <div className="w-20">
+              <Button active={true} onClick={handleClick}>
+                CREATE
+              </Button>
+            </div>
           </div>
         </div>
       </div>
-      <div className="col-span-12 row-span-3 grid grid-cols-12 grid-rows-12 p-4 gap-4">
-        <div className=" col-start-2 col-span-10 row-span-4">
+      <div className="col-span-12 row-span-3 grid grid-cols-12 grid-rows-12 p-4 gap-4 px-8">
+        <div className="col-span-12 row-span-4">
           <input
             placeholder="TITLE "
-            className="w-full h-full rounded-lg border-0 bg-gray-700 px-2"
+            className="w-full h-full rounded-lg border-0 bg-white dark:bg-gray-700 px-2"
             value={title}
             onChange={(e) => {
               setTitle(e.target.value);
             }}
           />
         </div>
-        <div className="relative w-full bg-slate-700 col-start-2 col-span-10 row-span-7 flex items-center justify-center rounded-lg gap-4 flex-col overflow-hidden">
+        <div className="relative w-full  bg-white dark:bg-slate-700 bg-opacity-50 backdrop-blur-md  col-span-12 row-span-7 flex items-center justify-center rounded-lg gap-4 flex-col overflow-hidden">
           {heroImage ? (
             <>
               <img src={heroImage} className="w-full h-full object-cover" />
@@ -315,17 +328,47 @@ export function SimpleEditor() {
           )}
         </div>
       </div>
-      <div className="col-span-12 row-span-8 grid grid-cols-12 grid-rows-12">
-        <div className="col-span-12 row-span-4 flex w-full gap-2 p-2 flex-wrap">
+      <div className=" col-span-12 row-span-8 grid grid-cols-12 grid-rows-12 px-8">
+        <div
+          onClick={() => setMenu(false)}
+          className={`absolute top-0 z-10 left-0 w-full h-full bg-white bg-opacity-50 dark:bg-black dark:bg-opacity-40 backdrop-blur-md sm:bg-opacity-0 sm:backdrop-blur-0 ${
+            menu
+              ? "opacity-100 pointer-events-auto"
+              : "opacity-0 pointer-events-none"
+          } `}
+        ></div>
+        <div
+          className={`absolute z-10 duration-500 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 col-span-12 row-span-4 flex w-4/6 gap-2 p-2 flex-wrap bg-white bg-opacity-10 dark:bg-blue-950 dark:bg-opacity-40  rounded-lg backdrop-blur-md ${
+            menu
+              ? "opacity-100 pointer-events-auto"
+              : "opacity-0 pointer-events-none"
+          }`}
+        >
           {options.map((option, idx) => (
             <div className="flex" key={`textEditor_${idx}`}>
-              <Button {...option}>{option.label}</Button>
+              <Button
+                {...option}
+                onChange={(e) => {
+                  option.onChange(e);
+                  setMenu(false);
+                }}
+                onClick={(e) => {
+                  option.onClick(e);
+                  setMenu(false);
+                }}
+              >
+                {option.label}
+              </Button>
             </div>
           ))}
         </div>
         <EditorContent
+          onContextMenu={(e) => {
+            e.preventDefault();
+            setMenu(true);
+          }}
           editor={editor}
-          className="p-2 row-span-8 col-span-12 rounded-lg border-2 border-white overflow-x-hidden h-full"
+          className="p-2 bg-white row-start-1  dark:bg-gray-700 row-span-11 col-span-12 rounded-lg border-2 border-white overflow-x-hidden h-full"
           onClick={() => {
             editor.commands.focus();
           }}

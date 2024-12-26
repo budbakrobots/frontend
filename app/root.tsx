@@ -52,7 +52,10 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Meta />
         <Links />
       </head>
-      <body className="grid grid-cols-12 grid-rows-10 h-screen overflow-hidden">
+      <body
+        style={{ backgroundImage: "url('/background.svg')" }}
+        className="grid grid-cols-12 grid-rows-10 h-screen overflow-hidden bg-blue-50 dark:bg-blue-950 "
+      >
         <Menu />
         {loading ? <Loading /> : children}
         <ScrollRestoration />

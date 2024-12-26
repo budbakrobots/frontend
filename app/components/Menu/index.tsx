@@ -9,16 +9,14 @@ const Menu = () => {
   const session = useAtom(global_session)[0];
   return (
     <nav
-      className={` w-full flex items-center  p-2 row-span-1 col-span-12 ${
-        session ? "justify-between" : "justify-center"
+      className={` w-full flex items-center  p-2 px-8 row-span-1 col-span-12 justify-center sm:justify-between ${
+        session && "justify-between"
       }`}
     >
       <Link to="/">
-        <p className="w-28 [&>svg]:w-full">
-          <Logo />
-        </p>
+        <Logo />
       </Link>
-      <div className="flex items-center">
+      <div className="flex items-center gap-4">
         <div className="hidden col-span-12 row-span-1 sm:grid grid-rows-1 grid-cols-12">
           <Search />
         </div>

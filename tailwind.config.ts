@@ -4,6 +4,7 @@ export default {
   content: ["./app/**/{**,.client,.server}/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
+      colors: {},
       fontFamily: {
         sans: [
           "Inter",
@@ -19,8 +20,8 @@ export default {
     },
   },
   plugins: [],
-  respectDefaultStyles: true, 
+  respectDefaultStyles: true,
   corePlugins: {
     preflight: false, // This is the key change!
-  }
+  },
 } satisfies Config;

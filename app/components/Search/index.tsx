@@ -8,10 +8,11 @@ const Search = () => {
   const [search, setSearch] = useAtom(global_search);
   return (
     <>
-      <div className="col-span-12 row-span-1 grid grid-cols-7 grid-rows-1 p-2 gap-2 ">
+      <div className="col-span-12 row-span-1 grid grid-cols-7 grid-rows-1 p-1 gap-2  bg-white bg-opacity-70 sm:rounded-lg ">
         <input
-          className="col-span-6 p-2"
+          className="col-span-6 p-2 bg-transparent "
           value={search}
+          placeholder="search..."
           onChange={(e) => {
             setSearch(e.target.value);
           }}
