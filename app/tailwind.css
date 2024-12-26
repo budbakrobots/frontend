@@ -12,6 +12,11 @@
   border-radius: 0.5rem;
   margin-left: 5%;
 }
+
+a {
+  all: unset;
+}
+
 html,
 body {
   @apply bg-blue-200 dark:bg-gray-950;

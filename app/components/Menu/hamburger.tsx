@@ -12,7 +12,7 @@ const Hamburger = () => {
   const navigate = useNavigate();
   return session ? (
     <>
-      <div className="relative">
+      <div className="relative flex w-fit h-full items-center ">
         <div className="w-10 h-10">
           <Button
             active={true}
