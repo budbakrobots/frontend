@@ -26,6 +26,7 @@ body {
 }
 
 input {
+  position: relative;
   border: 0px;
   border-radius: 0.5rem;
 }
