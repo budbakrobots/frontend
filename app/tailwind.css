@@ -25,3 +25,9 @@ body {
     color-scheme: dark;
   }
 }
+
+input {
+  background-color: rgba(255, 255, 255, 0.2);
+  border: 0px;
+  border-radius: 0.5rem;
+}

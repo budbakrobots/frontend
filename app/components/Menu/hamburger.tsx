@@ -25,8 +25,10 @@ const Hamburger = () => {
         </div>
       </div>
       <div
-        className={`z-20 grid grid-rows-12 col-span-12 row-span-8 w-full absolute bottom-0 left-0 bg-gray-950 p-2 gap-2 h-[90%] duration-500 ${
-          menu ? "translate-x-0" : "-translate-x-full"
+        className={`z-20 shadow-2xl grid grid-rows-12 col-span-12 row-span-8 w-full absolute bottom-0 left-0 bg-slate-700 p-2 gap-2 h-[90%] duration-500 sm:grid-rows-4 sm:h-52 sm:w-52 sm:bottom-auto sm:top-[10.5%] sm:rounded-lg sm:left-auto sm:right-2 ${
+          menu
+            ? "translate-x-0 opacity-100 pointer-events-auto"
+            : "-translate-x-full opacity-0 pointer-events-none"
         }`}
       >
         <Button
