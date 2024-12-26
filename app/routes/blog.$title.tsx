@@ -29,7 +29,12 @@ const Blog = () => {
   return (
     <div className="col-span-12 row-span-10 overflow-x-hidden grid grid-cols-12 grid-rows-12">
       {data && <HeroSection image={data.heroImage} text={data.title} />}
-      <div ref={divRef} className="col-span-12 row-span-10"></div>
+      <div className="col-span-12 row-span-10 flex sm:p-8">
+        <div
+          ref={divRef}
+          className="w-full h-full overflow-x-hidden p-4  bg-white dark:bg-black dark:bg-opacity-50 bg-opacity-70  sm:rounded-lg"
+        ></div>
+      </div>
     </div>
   );
 };
