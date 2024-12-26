@@ -10,8 +10,7 @@ const Search = () => {
 
   return (
     <>
-      import Button from "./button";
-      <div className="col-span-12 row-span-1 grid grid-cols-7 grid-rows-1 p-1 px-4 sm:px-1 gap-2  bg-white bg-opacity-10 backdrop-blur-md">
+      <div className="col-span-12 row-span-1 grid grid-cols-7 grid-rows-1 p-1 px-4 sm:px-1 gap-2  bg-white bg-opacity-10 backdrop-blur-md sm:rounded-md">
         <input
           ref={inputRef}
           className="col-span-6 p-2 bg-transparent "

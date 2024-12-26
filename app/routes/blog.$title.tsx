@@ -1,8 +1,22 @@
+import { MetaFunction } from "@remix-run/node";
 import { useActionData, useLoaderData, useLocation } from "@remix-run/react";
 import { useAtom } from "jotai";
 import React, { useEffect, useRef, useState } from "react";
 import HeroSection from "~/components/HeroSection";
 import { global_supabase } from "~/store";
+
+export const meta: MetaFunction = () => {
+  const title = useLoaderData();
+
+  return [
+    { title: `Budbak Robots :${title}` },
+    {
+      name: "description",
+      content:
+        "Bugbak Robots: Your go-to resource for conquering robotics software challenges. We dive into the latest tech, dissect common bugs, and offer practical solutions for roboticists, engineers, and developers working with ROS, simulation, and more. Join our community and level up your robot programming skills.",
+    },
+  ];
+};
 
 const Blog = () => {
   const [data, setData] = useState<any>();
