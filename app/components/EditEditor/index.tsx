@@ -28,9 +28,11 @@ export function EditEditor({ blog }: any) {
   const navigate = useNavigate();
   const [heroImage, setHeroImage] = useState("");
   const [menu, setMenu] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [title, setTitle] = useState<string>("");
   const [result, setResult] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+
   useEffect(() => {
     if (blog.heroImage) setHeroImage(blog.heroImage);
     if (blog.title) setTitle(blog.title);
@@ -229,26 +231,29 @@ export function EditEditor({ blog }: any) {
         const filebase64: any = await convertImageToBase64(e.target.files[0]);
         editor.chain().focus().setImage({ src: filebase64 }).run();
       },
+      active:true
     },
     {
       label: "add Image by URI",
       onClick: () => {
         addImage();
       },
+      active:true
+
     },
   ];
 
   const handleClick = async () => {
     if (!supabase) return;
+    setLoading(true)
     const content = await editor.getHTML();
     let dataToInsert: any = {
       title: title,
       // heroImage,
       content,
     };
-    if (heroImage) {
-      dataToInsert = { ...dataToInsert, heroImage };
-    }
+
+    dataToInsert = { ...dataToInsert, heroImage };
 
     const { data, error } = await supabase
       .from("blogs")
@@ -262,6 +267,8 @@ export function EditEditor({ blog }: any) {
       console.log("Updated blog:");
       navigate("/");
     }
+    setLoading(false)
+
   };
 
   return (
@@ -281,7 +288,7 @@ export function EditEditor({ blog }: any) {
               </Button>
             </div>
             <div className="w-20">
-              <Button active={true} onClick={handleClick}>
+              <Button onClick={handleClick} active={!loading}>
                 Update
               </Button>
             </div>

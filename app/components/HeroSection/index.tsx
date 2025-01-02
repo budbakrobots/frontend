@@ -10,7 +10,7 @@ const HeroSection = ({ image, text }: { image: string; text: string }) => {
       >
         <div className="absolute top-0 left-0 h-full w-full bg-white dark:bg-black opacity-10 backdrop-blur-lg"></div>
         {image ? (
-          <img src={image} className="w-full h-full object-cover" alt="" />
+          <img src={image} className="w-full h-full object-cover" alt="" loading="lazy"/>
         ) : (
           <Bg />
         )}

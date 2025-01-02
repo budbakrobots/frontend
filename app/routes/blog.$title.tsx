@@ -42,8 +42,8 @@ const Blog = () => {
   }, [title, supabase]);
   return (
     <div className="col-span-12 row-span-10 overflow-x-hidden grid grid-cols-12 grid-rows-12">
-      {data && <HeroSection image={data.heroImage} text={data.title} />}
-      <div className="col-span-12 row-span-10 flex sm:p-8">
+      {data && data.heroImage && <HeroSection image={data.heroImage} text={data.title} />}
+      <div className={`col-span-12 ${data && data.heroImage?"row-span-10":"row-span-12"} flex sm:p-8`}>
         <div
           ref={divRef}
           className="w-full h-full overflow-x-hidden p-4  bg-white dark:bg-black dark:bg-opacity-50 bg-opacity-70  sm:rounded-lg"

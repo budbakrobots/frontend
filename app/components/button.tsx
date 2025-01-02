@@ -22,8 +22,8 @@ const Button: React.FC<{
       />
       <label
         htmlFor={rand}
-        className={`p-2 rounded-lg border overflow-hidden border-gray-400   ${
-          active ? "bg-slate-800 text-white" : "bg-transparent"
+        className={`p-2 rounded-lg border overflow-hidden border-gray-400 duration-500 bg-slate-800   ${
+          active ? "pointer-events-auto" : "  animate-pulse pointer-events-none"
         }`}
       >
         {children}

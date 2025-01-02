@@ -225,12 +225,14 @@ export function SimpleEditor() {
         const filebase64: any = await convertImageToBase64(e.target.files[0]);
         editor.chain().focus().setImage({ src: filebase64 }).run();
       },
+      active:true
     },
     {
       label: "add Image by URI",
       onClick: () => {
         addImage();
       },
+      active:true
     },
   ];
 
